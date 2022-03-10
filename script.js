@@ -8,3 +8,15 @@ function findWeather() {
             if (response.ok)
                 response.json().then(function(data) {
                     getWeather(data)
+                })
+        })
+}
+const URL = 'https://aztro.sameerkumar.website/?sign=scorpio&day=today';
+fetch(URL, {
+    method: 'POST'
+})
+    .then(response => response.json())
+    .then(json => {
+        const date = json.description;
+        console.log(json);
+    });
