@@ -1,0 +1,15 @@
+.none {
+    display: none;
+}
+
+#zodiac-sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#city-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
