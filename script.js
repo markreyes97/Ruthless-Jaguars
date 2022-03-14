@@ -9,9 +9,24 @@ function findWeather() {
         .then(function(response) {
             if (response.ok)
                 response.json().then(function(data) {
-                    console.log(data)
+                    useOneCall(data)
                 })
         })
+}
+
+var useOneCall = function (cityData) {
+    var cityLat = cityData.coord.lat
+    var cityLon = cityData.coord.lon
+    var oneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&exclude=alerts,minutely,hourly" + apiKey
+    fetch(oneCall)
+        .then(function(response) {
+            if (response.ok)
+                response.json().then(function(data) {
+                    console.log(((data.daily[0].feels_like.morn-273.15)*1.8)+32)
+                    console.log(((data.daily[0].feels_like.day-273.15)*1.8)+32)
+                    console.log(((data.daily[0].feels_like.night-273.15)*1.8)+32)
+            });
+        })   
 }
 
 
@@ -39,7 +54,9 @@ buttonEl.addEventListener('click', function () {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            console.log(data.description);
+            console.log(data.mood);
+            console.log(data.lucky_number);
         });
     });
 
