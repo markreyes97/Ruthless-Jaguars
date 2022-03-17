@@ -5,6 +5,12 @@ var weatherEl = document.querySelector("#city-text")
 var weatherResultsEl = document.querySelector("#weather-results")
 var openingEl = document.querySelector(".opening")
 var resultsEl = document.querySelector(".results")
+var outlookEl = document.querySelector(".outlook")
+var selectEl = document.querySelector('#selection');
+var buttonEl = document.querySelector('#btn')
+var outlookBtn = document.querySelector("#daily-btn")
+var dailyOutlookEl = document.querySelector("#daily-outlook")
+var quizzesEl = document.querySelector("#daily-quizzes")
 
 
 var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q="
@@ -49,12 +55,66 @@ var useOneCall = function (cityData) {
                     nightText.innerHTML = "<u>Night feels like:</u> <strong>" + night +"</strong>°F";
                     nightText.classList.add("is-size-2", "my-3")
                     weatherResultsEl.append(nightText)
-                });
-        })   
-}
+                    
 
-var selectEl = document.querySelector('#selection');
-var buttonEl = document.querySelector('#btn')
+                    var dailyOutlook = document.createElement('h1')
+                    var morningOutlook =document.createElement("p")
+                    var dayOutlook = document.createElement("p")
+                    var nightOutlook = document.createElement("p")
+                    var city = cityEl.value;
+                    dailyOutlook.innerHTML = "Daily Outlook for " + city
+                    
+                    if (morning < 32) {
+                        morningOutlook.innerHTML = "Well, it's going to be a cold one this morning, dropping below freezing. Don't forget to bring a coat or heavy jacket with you before leaving! "
+                    }
+                    if (morning > 32 && morning < 50) {
+                        morningOutlook.innerHTML = "A bit nippy out this morning! Probably a great day for a long sleeve shirt, but who knows! "
+                    }
+                    if (morning > 50 && morning < 70) {
+                        morningOutlook.innerHTML = "Feeling good out there this morning, looking like a single layer day. "
+                    }
+                    if (morning > 70) {
+                        morningOutlook.innerHTML = "Things are heating up this morning! Could be quite a hot one today. "
+                    }
+                    if (day < 32) {
+                        dayOutlook.innerHTML = "It's freezing cold outside, so you may as well avoid it if you can. If you must go out, please dress warm and appropriately. "
+                    }
+                    if (day > 32 && day < 50) {
+                        dayOutlook.innerHTML = "It's gonna be a brisk one out there today! Have a jacket or sweatshirt on standby so you don't get caught lacking today. "
+                    }
+                    if (day > 50 && day < 65) {
+                        dayOutlook.innerHTML = "Decent day, great for a long sleeve, light jacket or even just a t-shirt, if your feeling a little bold in the slightly above cold. "
+                    }
+                    if (day > 65 && day < 80) {
+                        dayOutlook.innerHTML = "My favorite meteorologist saying 'It's gonna heat up a little bit out there over the course of the day, so stay hydrated and find something fun to do'"
+                    }
+                    if (day > 80) {
+                        dayOutlook.innerHTML = "It's feeling hot hot hot during the day today. Cool refreshments and good times are hopefully on deck for you. "
+                    }
+                    if (night < 32) {
+                        nightOutlook.innerHTML = "Cozy up next to a warm fire, grab a nice novel or put on a good movie, because it's frigid out there tonight. "
+                    }
+                    if (night > 32 && night < 50) {
+                        nightOutlook.innerHTML = "Going to be dipping into a chilly night, but nothing a sweatshirt or jacket can't protect you from. "
+                    }
+                    if (night > 50 && night < 70) {
+                        nightOutlook.innerHTML = "Looks like a beautiful night is in the making, any outfit is on the table with this weather, except if it's raining, then have to get out the rainboots. "
+                    }
+                    if (night > 70) {
+                        nightOutlook.innerHTML = "A warm and cozy night outside, perfect for outdoor activities or hitting the town! "
+                    }
+                    morningOutlook.classList.add("is-size-3", "my-3")
+                    dayOutlook.classList.add("is-size-3", "my-3")
+                    nightOutlook.classList.add("is-size-3", "my-3")
+                    dailyOutlook.classList.add("title", "is-1", "my-3", "is-underlined")
+                    dailyOutlookEl.append(dailyOutlook)
+                    dailyOutlookEl.append(morningOutlook)
+                    dailyOutlookEl.append(dayOutlook)
+                    dailyOutlookEl.append(nightOutlook)
+                });
+        });
+}  
+
 
 var buildResults = function() {
     var sign = selectEl.value;
@@ -79,9 +139,53 @@ var zodiacResults = function() {
             zodiacDesc.innerHTML = "<u>Daily Horoscope:</u> <strong>" + data.description + "</strong>";
             zodiacDesc.classList.add("is-size-3", "my-3");
             zodiacResultsEl.append(zodiacDesc);
-            var zodiacMood = document.createElement("p");
+            var zodiacMood = document.createElement("a");
             zodiacMood.innerHTML = "<u>Mood:</u> <strong>" + data.mood + "</strong>";
             zodiacMood.classList.add("is-size-2", "my-3");
+            if (data.mood === "Sincere" || data.mood === "Thoughtful" || data.mood === "Cherishing" || data.mood === "Sweet") {
+                var playlist = "37i9dQZF1DXdPec7aLTmlC"
+            }
+            if (data.mood === "Independent" || data.mood === "Brave") {
+                playlist = "37i9dQZF1DWVY5eNJoKHd2"
+            }
+            if (data.mood === "Busy" || data.mood === "Serious" || data.mood === "Cautious") {
+                playlist = "2mz8otPq7vwtatQL6VxUha"
+            }
+            if (data.mood === "Friendly" || data.mood === "Social" || data.mood === "Cool" || data.mood === "Playful") {
+                playlist = "37i9dQZF1DXa2PvUpywmrr"
+            }
+            if (data.mood === "Relieved" || data.mood === "Refreshed" || data.mood === "Relaxed" || data.mood === "Calm") {
+                playlist = "37i9dQZF1DWYBO1MoTDhZI"
+            }
+            if (data.mood === "Accomplished" || data.mood === "Successful") {
+                playlist = "37i9dQZF1DX8dTWjpijlub"
+            }
+            if (data.mood === "Persuade" || data.mood === "Determined" || data.mood === "Focus" || data.mood === "Creative") {
+                playlist = "37i9dQZF1DX76Wlfdnj7AP"
+            }
+            if (data.mood === "Crazy") {
+                playlist = "37i9dQZF1DZ06evO3nMr04"
+            }
+            if (data.mood === "Lucky" || data.mood === "Attractive") {
+                playlist = "37i9dQZF1DX6GwdWRQMQpq"
+            }
+            fetch("https://spotify23.p.rapidapi.com/playlist_tracks/?id=" + playlist, {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "spotify23.p.rapidapi.com",
+                        "x-rapidapi-key": "3316d853b8msh8a70d2564ae8afdp175191jsn7f8129692ba4"
+                    }
+            })
+            .then(response => {
+                if (response.ok)
+                response.json().then(function(data) {
+                    console.log(data)
+                    var random = Math.round(Math.random()*data.items.length);
+                    console.log(random)
+                    var song = data.items[random].track.external_urls.spotify
+                    zodiacMood.setAttribute("href", song)
+                    })
+            });
             zodiacResultsEl.append(zodiacMood);
             var zodiacNum = document.createElement("p");
             zodiacNum.innerHTML = "<u>Lucky Number:</u> <strong>" + data.lucky_number + "</strong>";
@@ -143,10 +247,17 @@ var getBackground = function(background) {
     
 }
 
-
+var getOutlook = function () {
+    resultsEl.classList.add("none")
+    outlookEl.classList.remove("none")
+}
 
 buttonEl.addEventListener('click', function () {
     findWeather();
     buildResults();
     zodiacResults();
 });
+
+outlookBtn.addEventListener('click', function() {
+    getOutlook();
+})
